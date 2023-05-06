@@ -1,0 +1,44 @@
+CREATE TABLE people (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);
+
+INSERT INTO people (name) Values ("Rihanna");
+INSERT INTO people (name) Values ("Lizzo");
+INSERT INTO people (name) Values ("Jennifer Lopez");
+INSERT INTO people (name) Values ("Marc Anthony");
+INSERT INTO people (name) Values ("The Weekend");
+INSERT INTO people (name) Values ("Ice Cube");
+INSERT INTO people (name) Values ("Eminem");
+INSERT INTO people (name) Values ("Method Man");
+INSERT INTO people (name) Values ("Jennifer Aniston");
+INSERT INTO people (name) Values ("Meghan Markle");
+INSERT INTO people (name) Values ("Emma Stone");
+INSERT INTO people (name) Values ("Will Ferrel");
+
+CREATE TABLE movies (id INTEGER PRIMARY KEY AUTOINCREMENT, name text, star INTEGER);
+
+INSERT INTO movies (name, star) Values ("Battleship", "1");
+INSERT INTO movies (name, star) Values ("Hustlers", "2");
+INSERT INTO movies (name, star) Values ("Second Act", "3");
+INSERT INTO movies (name, star) Values ("El Cantante", "4");
+INSERT INTO movies (name, star) Values ("Uncut Gems","5");
+INSERT INTO movies (name, star) Values ("Friday", "6");
+INSERT INTO movies (name, star) Values ("8 Mile", "7");
+INSERT INTO movies (name, star) Values ("How High", "8");
+INSERT INTO movies (name, star) Values ("Just Go With It", "9");
+INSERT INTO movies (name, star) Values ("Horrible Bosses", "10");
+INSERT INTO movies (name, star) Values ("The Help", "11");
+INSERT INTO movies (name, star) Values ("Step Brothers", "12");
+
+CREATE TABLE songs (id INTEGER PRIMARY KEY, name text, singer INTEGER);
+
+INSERT INTO songs (name, singer) Values ("Lift Me Up", "1");
+INSERT INTO songs (name, singer) Values ("Truth Hurts", "2");
+INSERT INTO songs (name, singer) Values ("LIMITLESS", "3");
+INSERT INTO songs (name, singer) Values ("Aganile", "4");
+INSERT INTO songs (name, singer) Values ("The Morning", "7");
+INSERT INTO songs (name, singer) Values ("Friday", "9");
+INSERT INTO songs (name, singer) Values ("Lose Yourself", "10");
+INSERT INTO songs (name, singer) Values ("Da Rockwiler", "11");
+
+select p.name, m.name as Movie from people p join movies m on p.id=m.star; 
+
+select songs.name as song, people.name as singer from people join songs on songs.id=people.id;
