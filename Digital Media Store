@@ -1,0 +1,78 @@
+In this dataset called chinook, which will represent a digital media store and it will include tables for artists, albums, media tracks, invoices, and customers.
+
+#1 Show customers who are not in the US and in Brazil.
+
+SELECT FirstName, LastName, CustomerId, Country 
+FROM chinook.customers 
+WHERE (Country != "USA" and Country !="Brazil");
+
+#2 Show customers who are in the US.
+
+Select * From chinook.customers 
+WHERE Country="USA";
+
+#3 Show customers who are in Brazil.
+
+Select * From chinook.customers
+WHERE Country ="Brazil";
+
+#4 Find invoices from customers who are in Brazil.
+
+select cust.Firstname, cust.Lastname, inv.InvoiceId, inv.InvoiceDate, inv.BillingCountry
+from chinook.invoices inv
+left join chinook.customers cust 
+On inv.CustomerId=cust.CustomerId
+where BillingCountry="Brazil";
+
+#5 Find a distinct list of billing countries from the Invoice table.
+
+Select distinct BillingCountry from chinook.invoices;
+
+#6 Show list of employees who are Sales Agents.
+
+SELECT * FROM chinook.Employees
+WHERE Title = "Sales Support Agent" ;
+
+#7 Show invoices that are associated with each sales agent.
+
+select emp.Firstname, emp.LastName, inv.InvoiceId
+from chinook.employees emp
+join chinook.customers cust on cust.SupportRepId= emp.EmployeeId
+join chinook.invoices inv on inv.InvoiceId= cust.CustomerId;
+
+#8 Show invoice total for all invoices from customers.
+
+select emp.Firstname, emp.LastName, cust.Firstname, cust.LastName, cust.Country, inv.total
+from chinook.employees emp
+join chinook.customers cust on cust.SupportRepId= emp.EmployeeId
+join chinook.invoices inv on inv.InvoiceId= cust.CustomerId;
+
+#9 How many invoices were there in 2009?
+select count (*)
+from chinook.invoices
+where InvoiceDate Between '2009-01-01' and '2009-12-31';
+
+#10 What were the total sales in 2009?
+
+select SUM (Total)
+from chinook.invoices
+where InvoiceDate Between '2009-01-01' and '2009-12-31';
+
+#11 Show purchased tracks including the name of tracks with artists.
+
+select t.Name as Track, i.InvoiceLineId, ar.Name as Artist
+from chinook.invoice_items i
+left join chinook.tracks t on t.TrackId=i.TrackId
+Inner join chinook.albums a on a.AlbumId=t.AlbumId
+left join chinook.artists ar on ar.ArtistId=a.ArtistId;
+
+#12 Show all tracks which will include name, album name, media type and genre.
+
+SELECT t.Name AS 'Track Name', a.Title AS 'Album Title', m.Name AS 'Media Type', g.Name AS 'Genre'
+FROM chinook.tracks t
+JOIN chinook.Albums a 
+on a.AlbumId = t.AlbumId
+JOIN chinook.Media_Types m
+on m.MediaTypeId = t.MediaTypeId
+JOIN chinook.Genres g
+on g.GenreId = t.GenreId;
