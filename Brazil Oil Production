@@ -1,4 +1,4 @@
-In this project I wrote queries that showed oil production for Brazil.
+In this SQL I am querying data that has multiple tables that quantifies oil production for Brazil.
 
 1. Retrieved all data from Production table.
  select *
