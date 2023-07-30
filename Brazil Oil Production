@@ -1,0 +1,49 @@
+In this project I wrote queries that showed oil production for Brazil.
+
+1. Retrieved all data from Production table.
+ select *
+ from production;
+
+2.Get total oil production for each year.
+ 
+SELECT Year, SUM("Oil (m³)") AS Total_Oil_Production
+FROM brazil_oil_production.production
+GROUP BY Year;
+
+3. Calculated the average production of associated petroleum gas per month.
+
+SELECT Month, AVG("Associated petroleum gas (Mm³)") AS Avg_Associated_Gas_Production
+FROM brazil_oil_production.production
+GROUP BY Month;
+
+4. Calculated the total oil and gas production for each state in June.
+
+SELECT State, Month, SUM("Oil (m³)") AS Total_Oil_Production, SUM("Associated petroleum gas (Mm³)") AS Total_Gas_Production
+FROM brazil_oil_production.production
+WHERE Month = '6'
+GROUP BY State, Month;
+
+5. Found the top 10 states with the highest total oil production in 2019.
+
+SELECT p.Year, p.State, SUM(p."Oil (m³)") AS Total_Oil_Production
+FROM brazil_oil_production.production p
+WHERE p.Year = '2019'
+GROUP BY p.Year, p.State
+ORDER BY Total_Oil_Production DESC
+LIMIT 10;
+
+6. Calculated the average water injection per month for each field and displayed only results where the average exceeds 1000 m³.
+
+SELECT p.Field, p.Month, AVG(p."Water (m³)") AS Avg_Water_Injection
+FROM brazil_oil_production.production p
+GROUP BY p.Field, p.Month
+HAVING AVG(p."Water (m³)") > 1000;
+
+7. Got the monthly total oil production and gas production for each state in the Alagoas basin.
+
+SELECT p.Basin, p.State, p.Month,
+       SUM(p."Oil (m³)") AS Total_Oil_Production,
+       SUM(p."Associated petroleum gas (Mm³)") AS Total_Gas_Production
+FROM brazil_oil_production.production p
+WHERE p.Basin = 'Alagoas'
+GROUP BY p.Basin, p.State, p.Month;
